@@ -1,0 +1,70 @@
+<html lang="html">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes">
+    <title>Bookmarks</title>
+    <!-- https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css -->
+    <link rel="stylesheet" href="lib/pico.min.css">
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css -->
+    <link rel="stylesheet" href="lib/flexboxgrid.min.css" type="text/css">
+    <!-- https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js -->
+    <script defer src="lib/alpinejs.cdn.min.js"></script>
+
+    <script type="module">
+        // https://github.com/nuxodin/jema.js
+        // import the element from module, export to global (window), so that it can be accessed by main.js
+        // https://cdn.jsdelivr.net/gh/nuxodin/jema.js@x.x.x/schema.min.js
+        // import {Schema} from './lib/schema.min.js';
+
+        // window.Schema = Schema;
+        //console.log("window.Schema", Schema);
+    </script>
+    <style>
+        dialog article {
+            max-width: 1000px;
+        }
+
+        :root {
+            --pico-font-size: 100%;
+        }
+
+        table caption {
+            text-align: left;
+            background-color: darkgrey;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid" x-data="bookmarks">
+        <nav>
+            <h3>Bookmarks</h3>
+        </nav>
+
+        <form @submit.prevent="">
+            <input type="search" name="q" placeholder="Search" aria-label="Search" x-model="q" @input.debounce.100ms="search(q)" />
+        </form>
+        <div class="row">
+            <template x-for="(groupLinks, groupName) in groups">
+                <div class="col-xs">
+                    <div class="box">
+                        <h4 x-text="groupName"></h4>
+                        <ul>
+                            <template x-for="link in groupLinks">
+                                <li><a :href="link.url" x-text="link.name"></a></li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+
+        <script src="main.js"></script>
+
+    </div>
+</body>
+
+</html>
