@@ -52,7 +52,7 @@ document.addEventListener('alpine:init', () => {
                 url.searchParams.delete('q')
             }
             window.history.replaceState(null, '', url.toString())
-        }
+        },
     }))
 
 })
